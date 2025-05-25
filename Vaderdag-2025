@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Gelukkige Vaderdag!</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5faff;
+      text-align: center;
+      padding: 40px;
+      color: #333;
+    }
+    h1 {
+      color: #228b22;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    iframe {
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>Gelukkige Vaderdag, papa! 💚</h1>
+  <p>We houden van jou! Luister naar dit liedje dat ons aan jou doet denken:</p>
+
+  <!-- Three Little Birds - YouTube Embed -->
+  <iframe width="300" height="200"
+    src="https://www.youtube.com/embed/L7k1R0KQGxU"
+    title="Three Little Birds"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+
+  <p>🎶 Every little thing is gonna be alright... 🎶</p>
+</body>
+</html>
