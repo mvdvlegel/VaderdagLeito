@@ -1,74 +1,333 @@
 <!DOCTYPE html>
+
 <html lang="nl">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Gelukkige Vaderdag!</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #fce3ec, #f9f9f9);
-      text-align: center;
-      padding: 40px;
-      color: #444;
-      animation: fadeIn 2s ease-in;
-    }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+<meta charset="UTF-8" />
 
-    h1 {
-      font-size: 36px;
-      color: #d63384;
-      margin-bottom: 20px;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    p {
-      font-size: 20px;
-      margin: 20px auto;
-      max-width: 600px;
-    }
+<title>Vaderdag verrassing</title>
 
-    .hearts {
-      font-size: 24px;
-      color: #ff4da6;
-      margin-bottom: 20px;
-    }
+<style>
 
-    iframe {
-      border-radius: 15px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-    }
+  body {
 
-    iframe:hover {
-      transform: scale(1.05);
-    }
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
-    .footer {
-      margin-top: 40px;
-      font-size: 18px;
-      color: #666;
-    }
-  </style>
+    background: #f8f0e3;
+
+    color: #333;
+
+    text-align: center;
+
+    margin: 0;
+
+    padding: 20px;
+
+  }
+
+  h1 {
+
+    margin-top: 1rem;
+
+    font-size: 2rem;
+
+    color: #2a7a2a;
+
+  }
+
+  .gallery {
+
+    margin-top: 20px;
+
+    display: flex;
+
+    overflow-x: auto;
+
+    gap: 10px;
+
+    padding-bottom: 10px;
+
+    justify-content: center;
+
+  }
+
+  .gallery img {
+
+    height: 150px;
+
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    transition: transform 0.3s ease;
+
+  }
+
+  .gallery img:hover {
+
+    transform: scale(1.05);
+
+  }
+
+  audio {
+
+    margin-top: 15px;
+
+    outline: none;
+
+  }
+
+  /* Lightbox */
+
+  #lightbox {
+
+    position: fixed;
+
+    display: none;
+
+    top: 0; left: 0; right: 0; bottom: 0;
+
+    background: rgba(0,0,0,0.8);
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 9999;
+
+  }
+
+  #lightbox img {
+
+    max-width: 90%;
+
+    max-height: 80%;
+
+    border-radius: 10px;
+
+  }
+
+  #lightbox .close, #lightbox .prev, #lightbox .next {
+
+    position: fixed;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 3rem;
+
+    color: white;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    padding: 0 15px;
+
+    background: rgba(0,0,0,0.3);
+
+    border-radius: 5px;
+
+  }
+
+  #lightbox .close {
+
+    top: 20px;
+
+    right: 20px;
+
+    font-size: 2rem;
+
+    transform: none;
+
+  }
+
+  #lightbox .prev {
+
+    left: 10px;
+
+  }
+
+  #lightbox .next {
+
+    right: 10px;
+
+  }
+
+</style>
+
 </head>
+
 <body>
-  <div class="hearts">❤️ 💛 💚 💙 💜</div>
-  <h1>Gelukkige Vaderdag, papa! 💖</h1>
-  <p>We houden van jou met heel ons hart. Jij bent onze held, elke dag weer!</p>
 
-  <!-- YouTube-video -->
-  <iframe width="320" height="215"
-    src="https://www.youtube.com/embed/L7k1R0KQGxU"
-    title="Three Little Birds"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen>
-  </iframe>
+ 
 
-  <p>🎵 "Every little thing is gonna be alright..." 🎵</p>
+<h1>Fijne vaderdag, liefste papa! Nos stimabu ❤️</h1>
 
-  <div class="footer">Liefs van ons ❤️</div>
+ 
+
+<audio controls autoplay loop>
+
+  <source src="three-little-birds.mp3" type="audio/mpeg" />
+
+  Je browser ondersteunt geen audio afspelen.
+
+</audio>
+
+ 
+
+<div class="gallery" id="gallery">
+
+  <img src="foto1.jpg" alt="Foto 1" />
+
+  <img src="foto2.jpg" alt="Foto 2" />
+
+  <img src="foto3.jpg" alt="Foto 3" />
+
+  <img src="foto4.jpg" alt="Foto 4" />
+
+</div>
+
+ 
+
+<!-- Lightbox -->
+
+<div id="lightbox">
+
+  <span class="close">&times;</span>
+
+  <span class="prev">&#10094;</span>
+
+  <img src="" alt="Vergrote foto" />
+
+  <span class="next">&#10095;</span>
+
+</div>
+
+ 
+
+<script>
+
+  const gallery = document.getElementById('gallery');
+
+  const lightbox = document.getElementById('lightbox');
+
+  const lightboxImage = lightbox.querySelector('img');
+
+  const closeBtn = lightbox.querySelector('.close');
+
+  const prevBtn = lightbox.querySelector('.prev');
+
+  const nextBtn = lightbox.querySelector('.next');
+
+ 
+
+  const images = Array.from(gallery.querySelectorAll('img'));
+
+  let currentIndex = 0;
+
+  let slideInterval;
+
+ 
+
+  function openLightbox(index) {
+
+    currentIndex = index;
+
+    lightbox.style.display = 'flex';
+
+    lightboxImage.src = images[currentIndex].src;
+
+    resetInterval();
+
+  }
+
+ 
+
+  function closeLightbox() {
+
+    lightbox.style.display = 'none';
+
+    clearInterval(slideInterval);
+
+  }
+
+ 
+
+  function showNext() {
+
+    currentIndex = (currentIndex + 1) % images.length;
+
+    lightboxImage.src = images[currentIndex].src;
+
+  }
+
+ 
+
+  function showPrev() {
+
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+
+    lightboxImage.src = images[currentIndex].src;
+
+  }
+
+ 
+
+  function resetInterval() {
+
+    clearInterval(slideInterval);
+
+    slideInterval = setInterval(showNext, 4000); // wissel elke 4 sec
+
+  }
+
+ 
+
+  images.forEach((img, i) => {
+
+    img.addEventListener('click', () => openLightbox(i));
+
+  });
+
+ 
+
+  closeBtn.addEventListener('click', closeLightbox);
+
+  nextBtn.addEventListener('click', () => { showNext(); resetInterval(); });
+
+  prevBtn.addEventListener('click', () => { showPrev(); resetInterval(); });
+
+ 
+
+  // Slideshow automatisch starten in gallery view
+
+  slideInterval = setInterval(() => {
+
+    currentIndex = (currentIndex + 1) % images.length;
+
+    gallery.scrollTo({
+
+      left: images[currentIndex].offsetLeft - gallery.offsetLeft,
+
+      behavior: 'smooth'
+
+    });
+
+  }, 4000);
+
+</script>
+
+ 
+
 </body>
+
 </html>
